@@ -64,7 +64,7 @@ async def addroletoeveryone(ctx, role : discord.Role):
         await m.add_roles(role)
 
 @c.command()
-@commands.has_permissions(Adminstrator = True)
+@commands.has_permissions(Administrator = True)
 async def purge(ctx, limit=10):
     member = ctx.message.author
     await ctx.message.delete()
