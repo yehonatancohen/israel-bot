@@ -25,8 +25,8 @@ async def on_raw_reaction_add(payload):
     msgid = payload.message_id
 
 
-@c.command(aliases=['helpme'])
-async def help(ctx):
+@c.command(aliases=['cmd','command','cmds'])
+async def commands(ctx):
     author = ctx.message.author
 
     embed = discord.Embed(
@@ -80,5 +80,15 @@ async def purge(ctx, limit=10):
             msg.append(m)
     await ctx.channel.delete_messages(msg)
     await ctx.send(f"מחקתי {limit} הודעות", delete_after=2)
+
+@c.command(aliases=['h','helpme','עזרה'])
+async def help(ctx):
+    if ctx.channel.id != 796766184565243934:
+        await ctx.message.delete()
+        help_channel = discord.utils.get(ctx.guild.channels, name="『🙋』עזרה")
+        await ctx.channel.send(f"ניתן לשלוח את הפקודה הזאת רק בחדר {help_channel.mention}",delete_after=5)
+
+    staff = discord.utils.get(member.guild.roles, name="●▬▬▬▬staff▬▬▬▬●")
+    await ctx.channel.send(f"צריך את עזרתכם {ctx.member.mention} ,{staff.mention}")
 
 c.run(token)
