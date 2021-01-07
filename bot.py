@@ -92,6 +92,6 @@ async def help(ctx):
     channel = "`" + ctx.author.voice.channel.name + "` מחובר לחדר"
     if ctx.author.voice.channel == None:
         channel = "לא מחובר לאף חדר"
-    await ctx.channel.send(f"{channel} הוא \nצריך את עזרתכם {ctx.message.author.mention} ,{staff.mention}")
+    await ctx.channel.send(f"צריך את עזרתכם {ctx.message.author.mention} ,{staff.mention}\n{channel} הוא")
 
 c.run(token)
