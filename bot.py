@@ -88,9 +88,10 @@ async def help(ctx):
         help_channel = discord.utils.get(ctx.guild.channels, name="『🙋』עזרה")
         await ctx.channel.send(f"ניתן לשלוח את הפקודה הזאת רק בחדר {help_channel.mention}",delete_after=5)
 
-    staff = discord.utils.get(ctx.guild.roles, name="●▬▬▬▬staff▬▬▬▬●")
-    channel = "`" + ctx.author.voice.channel.name + "` מחובר לחדר"
-    if ctx.author.voice.channel == None:
+    try:
+        staff = discord.utils.get(ctx.guild.roles, name="●▬▬▬▬staff▬▬▬▬●")
+        channel = "`" + ctx.author.voice.channel.name + "` מחובר לחדר"
+    except:
         channel = "לא מחובר לאף חדר"
     await ctx.channel.send(f"צריך את עזרתכם {ctx.message.author.mention} ,{staff.mention}\n{channel} הוא")
 
