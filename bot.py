@@ -47,8 +47,9 @@ async def on_member_join(member):
     if rand1 == rand2:
         role2 = discord.utils.get(member.guild.roles, name="ציוני ראוי")
         await member.add_roles(role2)
+        await member.send("קיבלת רול **ציוני ראוי** שמקבלים אחת ל2 בחזקת 100 מצטרפים לשרת!")
     await member.add_roles(role)
-    welcome_channel = discord.utils.get(ctx.guild.channels, name="『🤝』ברוכים-הבאים")
+    welcome_channel = discord.utils.get(member.guild.channels, name="『🤝』ברוכים-הבאים")
     await welcome_channel.send(f"ברוכים הבאים לשרת {member.mention}")
 
 @c.command()
