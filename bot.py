@@ -46,13 +46,42 @@ async def test(ctx):
 @c.event
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Member")
+    rand1 = random.randint(1,100)
+    rand2 = random.randint(1,100)
+    if rand1 == rand2:
+        role2 = discord.utils.get(member.guild.roles, name="ציוני ראוי")
+        await member.add_roles(role2)
     await member.add_roles(role)
+    welcome_channel = discord.utils.get(ctx.guild.channels, name="『🤝』ברוכים-הבאים")
+    await welcome_channel.send(f"ברוכים הבאים לשרת {member.mention}")
 
 @c.command()
+@commands.has_role('Owner')
 async def addroletoeveryone(ctx, role : discord.Role):
     #role = discord.utils.get(ctx.guild.roles, name="Member")
     for m in ctx.guild.members:
         await ctx.channel.send(f"**Added role {role.name} to: {m.name} **")
         await m.add_roles(role)
+
+@c.command()
+@commands.has_permissions(Adminstrator = True)
+async def purge(ctx, limit=10):
+    member = ctx.message.author
+    await ctx.message.delete()
+    msg = []
+    try:
+        limit = int(limit)
+    except:
+        return await ctx.send(f"{ctx.message.author.mention} בבקשה להשתמש במספר")
+    if not member:
+        await ctx.channel.purge(limit=limit)
+        return await ctx.send(f"**מחקתי {limit} הודעות**", delete_after=2)
+    async for m in ctx.channel.history():
+        if len(msg) == limit:
+            break
+        if m.author == member:
+            msg.append(m)
+    await ctx.channel.delete_messages(msg)
+    await ctx.send(f"מחקתי {limit} הודעות", delete_after=2)
 
 c.run(token)
