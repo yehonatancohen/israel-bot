@@ -55,6 +55,4 @@ async def addroletoeveryone(ctx, role : discord.Role):
         await ctx.channel.send(f"**Added role {role.name} to: {m.name} **")
         await m.add_roles(role)
 
-
-
 c.run(token)
