@@ -35,7 +35,7 @@ async def command(ctx):
 
     embed.set_author(name='Help')
 
-    embed.add_field(name='.test', value='Test command', inline=False)
+    embed.add_field(name='.h', value='קורא לצוות', inline=False)
 
     await ctx.channel.send(embed=embed)
   
@@ -88,7 +88,10 @@ async def help(ctx):
         help_channel = discord.utils.get(ctx.guild.channels, name="『🙋』עזרה")
         await ctx.channel.send(f"ניתן לשלוח את הפקודה הזאת רק בחדר {help_channel.mention}",delete_after=5)
 
-    staff = discord.utils.get(member.guild.roles, name="●▬▬▬▬staff▬▬▬▬●")
-    await ctx.channel.send(f"צריך את עזרתכם {ctx.member.mention} ,{staff.mention}")
+    staff = discord.utils.get(ctx.guild.roles, name="●▬▬▬▬staff▬▬▬▬●")
+    channel = "`" + ctx.author.voice.channel.name + "` מחובר לחדר"
+    if ctx.author.voice.channel == None:
+        channel = "לא מחובר לאף חדר"
+    await ctx.channel.send(f"{channel} הוא \nצריך את עזרתכם {ctx.member.mention} ,{staff.mention}")
 
 c.run(token)
