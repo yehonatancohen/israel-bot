@@ -25,8 +25,8 @@ async def on_raw_reaction_add(payload):
     msgid = payload.message_id
 
 
-@c.command(aliases=['cmd','command','cmds'])
-async def commands(ctx):
+@c.command(aliases=['cmd','commands','cmds'])
+async def command(ctx):
     author = ctx.message.author
 
     embed = discord.Embed(
