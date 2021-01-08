@@ -95,4 +95,10 @@ async def help(ctx):
         channel = "לא מחובר לאף חדר"
     await ctx.channel.send(f"צריך את עזרתכם {ctx.message.author.mention} ,{staff.mention}\n{channel} הוא")
 
+@bot.command()
+@commands.has_permissions(administrator = True)
+async def setdelay(ctx, seconds: int):
+    await ctx.channel.edit(slowmode_delay=seconds)
+    await ctx.send(f"שיניתי את הקולדאון ל{seconds} שניות",delete_after=3)
+
 c.run(token)
